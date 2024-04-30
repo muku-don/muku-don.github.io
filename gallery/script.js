@@ -1,8 +1,21 @@
-const slider = document.querySelector('.slider');
+let currentPage = 1;
 
-function activate(e) {
-  const items = document.querySelectorAll('.item');
-  e.target.matches('.next') && slider.append(items[0]);
-  e.target.matches('.prev') && slider.append(items[items.ngth -1]);
+function toggleClass(e, toggleClassName) {
+  if (e.className.includes(toggleClassName)) {
+    e.className = e.className.replace(" " + toggleClassName, "");
+  } else {
+    e.className += " " + toggleClassName;
+  }
 }
-document.addEventListener('click',activate,false);
+
+function movePage(e, page) {
+  if (page == currentPage) {
+    currentPage += 2;
+    toggleClass(e, "left-side");
+    toggleClass(e.nextElementSibling, "left-side");
+  } else if ((page = currentPage - 1)) {
+    currentPage -= 2;
+    toggleClass(e, "left-side");
+    toggleClass(e.previousElementSibling, "left-side");
+  }
+}
